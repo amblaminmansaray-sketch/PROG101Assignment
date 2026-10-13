@@ -1,0 +1,209 @@
+LIMKOKWING UNIVERSITY OF CREATIVE TECHNOLOGY
+SIERRA LEONE
+
+
+PROGRAMMING LOGIC AND DESIGN
+COMMUNITY WASTE MANAGEMENT SYSTEM
+
+
+A logical solution to improve waste collection coordination in Sierra Leone
+
+
+
+Student Name: ______________________________
+Student ID: __________________________________
+Department: Information and Communication Technology
+Course: Programming Logic and Design
+Semester: 01
+Academic Period: September 2026 – January 2027
+Lecturer: ___________________________________
+ 
+Table of Contents
+•	1. Problem Description
+•	2. Background and Problem Analysis
+•	3. Proposed Solution
+•	4. Computational Thinking Process
+•	5. Algorithm Design
+•	6. Pseudocode
+•	7. Flowchart
+•	8. Logical Design Requirements
+•	9. Functional Modules
+•	10. Expected Outputs and Sample Scenarios
+•	11. SDG Alignment
+•	12. Open-Source Justification
+•	13. Digital Public Goods Justification
+•	14. Sierra Leone Community Impact and Sustainability
+•	15. Conclusion
+•	16. References
+•	Appendix A: GitHub and Submission Checklist
+ 
+1. Problem Description
+The selected community problem is the difficulty of coordinating waste collection in communities in Sierra Leone. Waste may accumulate around homes, markets, streets and drainage areas when collection requests are not recorded consistently, vehicles are unavailable, or the status of a collection is not tracked. This project proposes a logical Community Waste Management System that records collection requests, checks vehicle availability, assigns available vehicles and tracks whether a request is completed or remains pending.
+The purpose of the project is to design how a system should work. It is not a requirement to write a working computer program. The solution is expressed through an algorithm, pseudocode, a flowchart, functional modules and sample outputs.
+2. Background and Problem Analysis
+2.1 The community problem
+The central problem is that waste collection can be difficult to organize when there is no simple, consistent way to register requests and follow them through to completion. If information about a location or the collection status is missing, local coordinators may not know which areas need attention first. A request may also be delayed when no collection vehicle is available.
+2.2 Who is affected?
+Residents, market traders, community leaders, waste collectors and local authorities may all be affected. Residents and traders need cleaner surroundings; collection teams need clear information about where to go; and local authorities need a way to see which requests have been completed and which still require action.
+2.3 Why the problem exists
+Possible causes include incomplete reporting, poor coordination between communities and collection teams, limited vehicle availability, and a lack of consistent status updates. These are the conditions the proposed logical solution is designed to address; the report does not claim that one system alone can resolve every waste management challenge.
+2.4 Why a logical solution is needed
+A consistent process can ensure that each request is recorded, checked and given a clear status. When a vehicle is available, the request can be scheduled. When no vehicle is available, the request can remain on a pending list rather than being lost. After collection, the status can be updated so the coordinator can distinguish completed work from outstanding work.
+3. Proposed Solution
+The proposed Community Waste Management System is a simple request-management process for a community coordinator. The coordinator enters a location, waste type and estimated quantity. The system checks that the required details have been provided and registers the request. It then checks vehicle availability. If a vehicle is available, it is assigned and collection is scheduled. If no vehicle is available, the request is marked pending. For scheduled requests, the collection status is checked and updated. The system displays the result and can repeat the process for another request.
+The initial design is intentionally limited to the core process. In a later version, the system could include priorities for urgent locations, a vehicle register, dates and times, notifications, and reports. Those additions would need their own requirements and logic.
+4. Computational Thinking Process
+4.1 Decomposition
+The main waste collection problem is divided into smaller tasks: (1) collect the location and waste details; (2) validate the details; (3) register the request; (4) check vehicle availability; (5) assign a vehicle or mark the request pending; (6) record whether collection has happened; (7) update the status; and (8) display the result. Each task can be designed and checked separately, making the overall problem easier to manage.
+4.2 Pattern recognition
+Similar steps occur whenever a new collection request is made. Each request needs a location, waste details, a vehicle-availability check and a status. Repeated outcomes also appear: a vehicle is available or unavailable, and a scheduled collection is completed or still pending. Recognizing these repeated patterns allows the same decision process to be used for many requests.
+4.3 Abstraction
+The design focuses on information necessary to coordinate a request: request number, location, waste type, estimated quantity, vehicle availability and collection status. Personal details or unrelated information are not needed for the core process. This keeps the solution simple and focused on its purpose.
+4.4 Algorithm design
+The algorithm puts the tasks in a clear order and uses decisions to choose the correct path. It checks that request details are valid before registration, checks vehicle availability before assignment, and checks collection status before marking a request completed. Repetition allows the coordinator to process another request without restarting the whole process manually.
+5. Algorithm Design
+1.	START.
+2.	Enter the community location, waste type and estimated quantity.
+3.	Check whether all required details are valid.
+4.	If any required detail is missing or invalid, display an error and ask for the details again.
+5.	Register the valid waste collection request.
+6.	Check whether a collection vehicle is available.
+7.	If a vehicle is unavailable, mark the request as PENDING and display that no vehicle is available.
+8.	If a vehicle is available, assign it to the request and schedule collection.
+9.	Check whether the waste collection has been completed.
+10.	If collection is completed, update the status to COMPLETED.
+11.	If collection is not completed, keep the status as PENDING.
+12.	Display the request status and result.
+13.	Ask whether another request should be entered.
+14.	If YES, repeat the process for the next request.
+15.	If NO, END.
+6. Pseudocode
+CONSTANT COMPLETED = "COMPLETED"
+CONSTANT PENDING = "PENDING"
+
+FUNCTION RegisterRequest(location, wasteType, wasteQuantity)
+    IF location is empty OR wasteType is empty OR wasteQuantity <= 0 THEN
+        RETURN "INVALID"
+    ENDIF
+    SAVE request details
+    RETURN "REGISTERED"
+END FUNCTION
+
+FUNCTION ProcessRequest()
+    INPUT location
+    INPUT wasteType
+    INPUT wasteQuantity
+
+    requestResult = RegisterRequest(location, wasteType, wasteQuantity)
+
+    WHILE requestResult = "INVALID"
+        DISPLAY "Invalid details. Enter the request again."
+        INPUT location
+        INPUT wasteType
+        INPUT wasteQuantity
+        requestResult = RegisterRequest(location, wasteType, wasteQuantity)
+    ENDWHILE
+
+    INPUT vehicleAvailable
+
+    IF vehicleAvailable = "YES" THEN
+        AssignVehicle(location)
+        DISPLAY "Collection scheduled"
+        INPUT collectionCompleted
+
+        IF collectionCompleted = "YES" THEN
+            UpdateCollectionStatus(COMPLETED)
+            DisplayResult("Waste collection completed")
+        ELSE
+            UpdateCollectionStatus(PENDING)
+            DisplayResult("Collection is still pending")
+        ENDIF
+    ELSE
+        UpdateCollectionStatus(PENDING)
+        DisplayResult("No vehicle available; request is pending")
+    ENDIF
+END FUNCTION
+
+BEGIN
+    INPUT anotherRequest
+    WHILE anotherRequest = "YES"
+        ProcessRequest()
+        INPUT anotherRequest
+    ENDWHILE
+    DISPLAY "Waste request session ended"
+END
+7. Flowchart
+The flowchart below represents the same process as the algorithm and pseudocode. It includes input, processing, decisions, outputs and repetition. The NO branch for vehicle availability leads to a pending status. If a collection is not completed, the request also remains pending.
+ 
+8. Logical Design Requirements
+8.1 Input
+The system receives the community location, waste type, estimated waste quantity, vehicle availability, collection completion status and whether another request should be processed.
+8.2 Processing
+The system validates required request details, registers a valid request, checks vehicle availability, assigns a vehicle when possible and updates the request status based on the collection outcome.
+8.3 Output
+Outputs include confirmation that a request has been registered, a collection schedule, a message that no vehicle is available, a pending status, or confirmation that collection is completed.
+8.4 Variables, constants and data types
+Name	Suggested data type	Purpose
+location	Text/String	Community or collection location
+wasteType	Text/String	Category of waste reported
+wasteQuantity	Number	Estimated quantity; must be greater than zero
+vehicleAvailable	Boolean or YES/NO	Whether a vehicle can be assigned
+collectionCompleted	Boolean or YES/NO	Whether the scheduled collection occurred
+collectionStatus	Text/constant	PENDING or COMPLETED
+anotherRequest	Boolean or YES/NO	Controls repetition for additional requests
+COMPLETED	Constant	Standard completed status
+PENDING	Constant	Standard outstanding status
+8.5 Decision structures
+The design uses decisions to validate request details, determine whether a vehicle is available, and determine whether collection has been completed. Each decision has a clear outcome that directs the process to the next appropriate step.
+8.6 Repetition structures
+A WHILE loop repeats the request-entry process while required details are invalid. A second WHILE loop allows the coordinator to process multiple waste collection requests until the coordinator answers NO to the question about another request.
+8.7 Boolean logic
+The validation condition uses OR: if the location is empty OR the waste type is empty OR the quantity is not greater than zero, the request is invalid. Vehicle availability and collection completion use YES/NO conditions to select the next action.
+8.8 Modular design
+The solution separates registration, vehicle assignment, status updating and result display into modules. This makes each task easier to understand, test and improve without rewriting the whole process.
+9. Functional Modules
+RegisterRequest(location, wasteType, wasteQuantity): Checks required fields and records a valid request. Returns INVALID or REGISTERED.
+CheckVehicleAvailability(): Receives or checks the availability status of a collection vehicle.
+AssignVehicle(location): Links an available vehicle to the collection location and schedules the collection.
+UpdateCollectionStatus(status): Stores PENDING or COMPLETED as the current request status.
+DisplayResult(message): Displays a clear result to the coordinator.
+ProcessRequest(): Coordinates the complete process for one request by calling the smaller functions.
+10. Expected Outputs and Sample Scenarios
+The following scenarios demonstrate how the proposed logic should respond to different inputs. They are illustrative examples, not records from an implemented system.
+Scenario	Input/condition	System action	Expected output
+1	Location: Market; waste type: mixed; quantity: 8 bags; vehicle available: YES; collected: YES	Register, assign vehicle, update status	Waste collection completed; status COMPLETED.
+2	Location: Residential area; waste type: household; quantity: 5 bags; vehicle available: NO	Register request and set pending status	No vehicle available; request remains PENDING.
+3	Vehicle available: YES; collection completed: NO	Schedule collection and keep pending status	Collection is still pending.
+4	Location is empty	Reject invalid details and request correction	Invalid details. Enter the request again.
+5	A request is completed and coordinator selects another request: YES	Repeat request process	System accepts and processes the next request.
+11. SDG Alignment
+The project supports Sustainable Development Goal 11: Sustainable Cities and Communities, particularly the broad aim of making settlements more inclusive, safe, resilient and sustainable. Better coordination of waste collection can contribute to cleaner public spaces and improved management of waste. The project may also relate to SDG 3 (Good Health and Well-being) because cleaner surroundings can help reduce some environmental health risks. The strongest and primary alignment for this project is SDG 11.
+12. Open-Source Justification
+The proposed system could be developed using an open-source approach, meaning its source code and documentation would be made available under an appropriate open-source licence. This would allow qualified developers, students, civic groups and local authorities to inspect the design, report problems and contribute improvements. Potential benefits include lower licensing barriers, local adaptation, shared learning and less dependence on one developer or supplier.
+Open source does not automatically mean that a project is secure, maintained or free of every cost. The project would still need responsible maintainers, documentation, testing, privacy safeguards and a plan for ongoing support.
+13. Digital Public Goods Justification
+The system could move toward becoming a Digital Public Good if it were designed to serve the public interest, made openly available under a suitable licence, documented clearly, and maintained in a way that supports reuse and responsible contribution. A practical version should be accessible on common devices, use understandable language, avoid unnecessary personal data and be adaptable to different communities.
+A digital system is not automatically a Digital Public Good simply because it is free. Its licensing, openness, public benefit, safeguards and alignment with recognized DPG principles would need to be assessed.
+14. Sierra Leone Community Impact and Sustainability
+14.1 Expected community impact
+The system is intended to make collection requests easier to organize, provide visibility into pending work and help coordinators use available vehicles more systematically. Residents and traders may benefit from more reliable coordination, while collection teams and local authorities may benefit from clearer records.
+14.2 Beneficiaries
+Potential beneficiaries include residents, market traders, community leaders, waste collection workers, local councils and community-based organizations involved in sanitation.
+14.3 Long-term sustainability
+For long-term use, the system would need clear responsibility for managing requests, updating collection statuses and maintaining records. It should be tested with local users, work under realistic connectivity conditions, protect any personal information it collects, and provide a way to report errors. A pilot in one community could identify practical problems before wider use.
+14.4 Limitations
+The logical design cannot create additional vehicles, guarantee that a scheduled collection will happen, or replace waste-management funding and public cooperation. It organizes information and decisions; real-world outcomes depend on staff, equipment, transport, maintenance and community participation.
+15. Conclusion
+This project has analyzed a community waste management problem and developed a logical solution rather than a computer program. Computational thinking was applied to break the problem into smaller tasks, identify repeated processes, focus on essential information and organize a step-by-step algorithm. The algorithm was expressed in pseudocode and a flowchart, supported by variables, constants, data types, decisions, repetition and functional modules. Sample scenarios show how the system can handle completed and pending requests. With appropriate development, community testing and maintenance, the proposed system could support more organized waste collection in Sierra Leone.
+16. References
+16.	Limkokwing University of Creative Technology, Sierra Leone. (2026). Programming Logic and Design Assignment Brief, Semester 01, September 2026–January 2027.
+17.	United Nations. Sustainable Development Goal 11: Sustainable Cities and Communities. https://sdgs.un.org/goals/goal11
+18.	Digital Public Goods Alliance. Digital Public Goods Standard and resources. https://digitalpublicgoods.net/
+19.	Open Source Initiative. The Open Source Definition. https://opensource.org/osd
+Appendix A: GitHub and Submission Checklist
+•	Create a GitHub account and a repository using the required naming convention: PROG101_Assignment1_StudentName_StudentID.
+•	Upload the report, flowchart image, pseudocode and README.md.
+•	Use regular Git commits to show project progress.
+•	Include the repository URL, commit history evidence, README.md and a repository screenshot in the report.
+•	Print the report and flowchart clearly, arrange the hardcopy neatly and bind it as instructed.
+•	Submit the required softcopy files, including the report, flowchart, pseudocode, algorithm design, screenshots and README.md.
